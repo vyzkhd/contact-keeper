@@ -1,10 +1,14 @@
 const express = require("express");
+const connectDB = require("./Config/db");
 
 const app = express();
 
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
+connectDB();
+
+app.use(express.json({ extended: false }));
 
 // Define Routes
 app.use("/api/users", require("./Routes/Users"));
