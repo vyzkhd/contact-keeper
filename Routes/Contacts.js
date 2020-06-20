@@ -10,7 +10,7 @@ const Contact = require("../Models/Contact");
 // @access Private
 router.get("/", auth, async (req, res) => {
   try {
-    const contacts = await Contact.find({ user: req.user.id }).sort({
+    const contacts = await Contact.find({ user: req.user._id }).sort({
       date: -1,
     });
     res.json(contacts);
@@ -39,7 +39,7 @@ router.post(
         email,
         phone,
         type,
-        user: req.user.id,
+        user: req.user._id,
       });
 
       const contact = await newContact.save();
